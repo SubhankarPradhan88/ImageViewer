@@ -1,0 +1,12 @@
+.header-container {
+    width: 99%;
+    height: auto;
+    padding: 10px;
+    margin: 0 auto;
+    font: 18px;
+    color: #ffffff;
+    background: #263238;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
