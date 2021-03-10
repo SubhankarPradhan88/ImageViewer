@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -10,7 +11,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
-import { Header } from '../../common/header/Header';
+import Header from '../../common/header/Header';
+import Home from '../../screens/home/Home';
 import './Login.css';
 
 // Custom styles - Material Card component
@@ -37,8 +39,8 @@ const customStyles = () => ({
 
 const userDetails = [
     {
-        username: 'username_1',
-        password: 'password'
+        username: 'a',
+        password: 'a'
     },
     {
         username: 'username_2',
@@ -59,9 +61,14 @@ class Login extends React.Component {
             usernameRequired: 'dispNone',
             userPasswordRequired: 'dispNone',
             loginfailureMessage: 'dispNone',
-            accessToken: 'IGQVJWZAXplU1ZABZAUtqZA3l3cGhpbzhuM2RYVDFMRWJOQmtQaXZAfOE1zZAkxud29tWVhPVkVKd0IxbmVmSGFuWjVFTV8ybzJuMUkyUFRlQmhRcGI2c3M3UTNQZAXdXR01PWWtvWXFGNEpGSXNLSWZAPV25LMAZDZD'
+            accessToken: 'IGQVJYVjY2QXJEZAFNDdTFqb0R4emI1dDVUNWVQWVozRktHNGY4dXlZAVm1tVWdMSmYwM2k1cmxjOVdOcklMUlNqRkJpOW5vR0tWNnFtMHpsN3JoY1I1cDdfRVNSU0pJaTV0c3p0MFV6VWV4OTlucHJVVgZDZD'
         }
     }
+
+    componentDidMount() {
+        sessionStorage.removeItem("access-token");      // Clear the saved session storage
+    }
+
     // On Change handler for username & password input
     handleChange = (e, check) => {
         switch(check) {
@@ -98,6 +105,7 @@ class Login extends React.Component {
                 // Store access token on successful login
                 sessionStorage.setItem("access-token", this.state.accessToken);
                 this.setState({loginfailureMessage: 'dispNone'});
+                ReactDOM.render(<Home />, document.getElementById('root'));
             }else {
                 loginSuccess =  false;
                 // Check if the username / password is empty
@@ -121,7 +129,6 @@ class Login extends React.Component {
         }else {
             this.setState({userPasswordRequired: 'dispNone'});
         }
-        console.log('loginSuccess', loginSuccess);
     }
 
     render() {

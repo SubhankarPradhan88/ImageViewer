@@ -1,0 +1,14 @@
+.image-card-alignment {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+    padding: 2% 5% 2% 6%;
+}
+.dispNone {
+    display: none;
+}
+.dispBlock {
+    display: block;
+}
