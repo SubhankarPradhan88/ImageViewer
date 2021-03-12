@@ -10,6 +10,7 @@ import EditIcon from '@material-ui/icons/Edit';
 
 import './Profile.css';
 import Header from '../../common/header/Header';
+import FormDialog from '../../common/formDialog/FormDialog';
 
 // Custom styles - Material Card component
 const customStyles = (theme) => ({ 
@@ -20,7 +21,8 @@ const customStyles = (theme) => ({
     },
     root: {
         margin: '15px auto',
-        width: '80%'
+        width: '80%',
+        cursor: 'pointer'
     },
     editIcon: {
         fontSize: 17
@@ -40,17 +42,83 @@ class Profile extends React.Component {
         this.state = {
             profile_picture: sessionStorage.getItem('profile-picture'),
             instagram_posts: JSON.parse(sessionStorage.getItem('instagram-posts')),
-            fullName: 'Subhankar Pradhan'
+            fullName: 'Subhankar Pradhan',
+            updatedFullName: '',
+            selectedPostDetails: {},
+            openModal: false,
+            postModal: false,
+            editModal: false,
+            nameFieldEmpty: 'dispNone'
         }
+    }
+
+    openEditModalhandler = () => {
+        this.setState({ 
+            editModal: true,
+            postModal: false,
+            openModal: true 
+        });
+    }
+    openPostModalhandler = (selectedPost) => {
+        this.setState({ 
+            postModal: true,
+            editModal: false,
+            openModal: true,
+            selectedPostDetails: selectedPost
+        });
+    }
+    updateUserNameHandler = (updatedName) => {
+        let updatedFullName = updatedName.trim();
+        if(updatedFullName) {
+            this.setState({ 
+                fullName: updatedFullName,
+                nameFieldEmpty: 'dispNone',
+                updatedFullName
+            });
+        }
+    }
+    userNameSubmitHandler = () => {
+        if(!this.state.updatedFullName) {
+            this.setState({ nameFieldEmpty: 'dispBlock' });
+            return;
+        }else {
+            this.setState({ 
+                postModal: false,
+                editModal: false,
+                openModal: false,
+                updatedFullName: '',
+                nameFieldEmpty: 'dispNone'
+            });
+        }
+    }
+    closeFormDialogHandler = () => {
+        this.setState({ 
+            postModal: false,
+            editModal: false,
+            openModal: false,
+            updatedFullName: '',
+            nameFieldEmpty: 'dispNone'
+        });
     }
 
     render() {
         const { classes } = this.props;
-        let { fullName, profile_picture, instagram_posts } = this.state;
-        console.log('instagram_posts', instagram_posts);
+        let { openModal, postModal, editModal, fullName, profile_picture, instagram_posts, selectedPostDetails, nameFieldEmpty } = this.state;
         
         return(
             <React.Fragment>
+                <FormDialog 
+                    showModal={openModal} 
+                    selectedAction={{
+                        postModal,
+                        editModal,
+                        nameFieldEmpty
+                    }}
+                    selectedpostDetails={selectedPostDetails}
+                    updateUserNameHandler={this.updateUserNameHandler}
+                    userNameSubmitHandler={this.userNameSubmitHandler}
+                    closeFormDialogHandler={this.closeFormDialogHandler}
+                />
                 <Header 
                     displayItems = {{
                         displaySearchBar: false,
@@ -63,7 +131,7 @@ class Profile extends React.Component {
                         <Avatar src={profile_picture} alt="Profile picture" className={classes.avatarStyle} />
                     </div>
                     <div>
-                        <h2>{instagram_posts[0].username}</h2>
+                        <h2>{(instagram_posts && instagram_posts.length > 0) && instagram_posts[0].username}</h2>
                         <div className="profile-info-wrapper">
                             <div>Posts: 11</div>
                             <div>Follows: 12</div>
@@ -75,6 +143,7 @@ class Profile extends React.Component {
                                 variant="contained"
                                 color="secondary"
                                 className={classes.button}
+                                onClick={(e) => this.openEditModalhandler()}
                             >
                                 <EditIcon className={classes.editIcon} />
                             </Button>
@@ -82,9 +151,9 @@ class Profile extends React.Component {
                     </div>
                 </div>
                 <div className={classes.root}>
-                    <GridList cellWidth={200} cellHeight={300} className={classes.gridList} cols={3}>
-                        {instagram_posts.map((post) => (
-                        <GridListTile key={post.media_url}>
+                    <GridList cellHeight={300} cols={3}>
+                        {(instagram_posts && instagram_posts.length > 0) && instagram_posts.map((post) => (
+                        <GridListTile key={post.media_url} onClick={(e) => this.openPostModalhandler(post)}>
                             <img src={post.media_url} alt="Picture post" width="200" height="300" />
                         </GridListTile>
                         ))}
