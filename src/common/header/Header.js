@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom';
 
 import './Header.css';
 import Login from '../../screens/login/Login';
+import Profile from '../../screens/profile/Profile';
 
 // Custom styles - Material Card component
 const customStyles = (theme) => ({
@@ -67,13 +68,18 @@ class Header extends React.Component {
     }
     routeHandler = (check) => {
         if(check === 'logout') {
-            sessionStorage.removeItem("access-token");      // Clear the saved session storage
+            // Remove all saved data from sessionStorage
+            sessionStorage.clear();
+            // Route back to Login screen
             ReactDOM.render(<Login />, document.getElementById('root'));
+        }else {
+            // Route back to Profile screen
+            ReactDOM.render(<Profile />, document.getElementById('root'));
         }
     }
 
     render() {
-        const { classes } = this.props;
+        const { classes, displayItems } = this.props;
         document.body.addEventListener('click', this.handleDropDown, true);     // Close 'Sort' drop down on click anywhere in the document
 
         return (
@@ -82,9 +88,9 @@ class Header extends React.Component {
                     <div className="logo-padding">
                         Image Viewer
                     </div>
-                    {this.state.accessToken && <div className="flex-align width-15-percentage margin-right-10px">
+                    {displayItems['displayProfilePic'] && <div className="flex-align width-15-percentage margin-right-10px">
                         <div className="search-container">
-                            <Paper component="form" className={classes.root}>
+                            {displayItems['displaySearchBar'] && <Paper component="form" className={classes.root}>
                                 <div className={classes.iconButton}>
                                     <SearchIcon />
                                 </div>
@@ -94,15 +100,15 @@ class Header extends React.Component {
                                     inputProps={{ 'aria-label': 'search' }}
                                     onChange={(e) => this.onSearchEvent(e)}
                                 />
-                            </Paper>
-                            <div className={classes.headerAvatar}>
-                                <Avatar src={this.props.userPicture} alt="Profile picture" onClick={this.showDropDownHandler} />
+                            </Paper>}
+                            {displayItems['displayProfilePic'] && <div className={classes.headerAvatar}>
+                                <Avatar src={displayItems['userPicture']} alt="Profile picture" onClick={this.showDropDownHandler} />
                                 {this.state.showDropDown && <div className={classes.selectDropDown}>
-                                    <p onClick={this.routeHandler.bind(this,'myAccount')}>My Account</p>
-                                    <hr/>
+                                    {displayItems['displaySearchBar'] && <p onClick={this.routeHandler.bind(this,'myAccount')}>My Account</p>}
+                                    {displayItems['displaySearchBar'] && <hr/>}
                                     <p onClick={this.routeHandler.bind(this,'logout')}>Logout</p>
                                 </div>}
-                            </div>
+                            </div>}
                         </div>
                     </div>}
                 </header>

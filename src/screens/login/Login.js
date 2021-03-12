@@ -136,7 +136,12 @@ class Login extends React.Component {
         let { username, password } = this.state;
         return (
             <React.Fragment>
-                <Header />
+                <Header 
+                    displayItems = {{
+                        displaySearchBar: false,
+                        displayProfilePic: false
+                    }}
+                />
                 <Card className={classes.root}>
                     <CardContent>
                         <Typography variant="h5" component="h2">
