@@ -4,11 +4,11 @@ import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import Avatar from '@material-ui/core/Avatar';
 import SearchIcon from '@material-ui/icons/Search';
-import ReactDOM from 'react-dom';
 
 import './Header.css';
 import Login from '../../screens/login/Login';
 import Profile from '../../screens/profile/Profile';
+import Home from '../../screens/home/Home';
 
 // Custom styles - Material Card component
 const customStyles = (theme) => ({
@@ -71,21 +71,24 @@ class Header extends React.Component {
             // Remove all saved data from sessionStorage
             sessionStorage.clear();
             // Route back to Login screen
-            ReactDOM.render(<Login />, document.getElementById('root'));
+            this.props.history.push("/");
         }else {
             // Route back to Profile screen
-            ReactDOM.render(<Profile />, document.getElementById('root'));
+            this.props.history.push("/profile");
         }
+    }
+    redirectHomeHandler = (e) => {
+        this.props.history.push("/home");
     }
 
     render() {
         const { classes, displayItems } = this.props;
         document.body.addEventListener('click', this.handleDropDown, true);     // Close 'Sort' drop down on click anywhere in the document
-
+        
         return (
             <React.Fragment>
                 <header className="header-container">
-                    <div className="logo-padding">
+                    <div className={!displayItems['displaySearchBar'] ? "logo-padding cursorPointer" : "logo-padding"} onClick={!displayItems['displaySearchBar'] ? this.redirectHomeHandler.bind(this) : null}>
                         Image Viewer
                     </div>
                     {displayItems['displayProfilePic'] && <div className="flex-align width-15-percentage margin-right-10px">
@@ -104,9 +107,9 @@ class Header extends React.Component {
                             {displayItems['displayProfilePic'] && <div className={classes.headerAvatar}>
                                 <Avatar src={displayItems['userPicture']} alt="Profile picture" onClick={this.showDropDownHandler} />
                                 {this.state.showDropDown && <div className={classes.selectDropDown}>
-                                    {displayItems['displaySearchBar'] && <p onClick={this.routeHandler.bind(this,'myAccount')}>My Account</p>}
+                                    {displayItems['displaySearchBar'] && <p onClick={(e) => this.routeHandler('myAccount')}>My Account</p>}
                                     {displayItems['displaySearchBar'] && <hr/>}
-                                    <p onClick={this.routeHandler.bind(this,'logout')}>Logout</p>
+                                    <p onClick={(e) => this.routeHandler('logout')}>Logout</p>
                                 </div>}
                             </div>}
                         </div>

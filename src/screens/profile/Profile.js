@@ -107,58 +107,62 @@ class Profile extends React.Component {
         
         return(
             <React.Fragment>
-                <FormDialog 
-                    showModal={openModal} 
-                    selectedAction={{
-                        postModal,
-                        editModal,
-                        nameFieldEmpty
-                    }}
-                    selectedpostDetails={selectedPostDetails}
-                    updateUserNameHandler={this.updateUserNameHandler}
-                    userNameSubmitHandler={this.userNameSubmitHandler}
-                    closeFormDialogHandler={this.closeFormDialogHandler}
-                />
-                <Header 
-                    displayItems = {{
-                        displaySearchBar: false,
-                        displayProfilePic: true,
-                        userPicture: profile_picture
-                    }}
-                />
-                <div className="account-info-container">
-                    <div>
-                        <Avatar src={profile_picture} alt="Profile picture" className={classes.avatarStyle} />
-                    </div>
-                    <div>
-                        <h2>{(instagram_posts && instagram_posts.length > 0) && instagram_posts[0].username}</h2>
-                        <div className="profile-info-wrapper">
-                            <div>Posts: 11</div>
-                            <div>Follows: 12</div>
-                            <div>Followed By: 22</div>
+                {sessionStorage.getItem("access-token") ? 
+                <React.Fragment>
+                    <FormDialog 
+                        showModal={openModal} 
+                        selectedAction={{
+                            postModal,
+                            editModal,
+                            nameFieldEmpty
+                        }}
+                        selectedpostDetails={selectedPostDetails}
+                        updateUserNameHandler={this.updateUserNameHandler}
+                        userNameSubmitHandler={this.userNameSubmitHandler}
+                        closeFormDialogHandler={this.closeFormDialogHandler}
+                    />
+                    <Header 
+                        history={this.props.history}
+                        displayItems = {{
+                            displaySearchBar: false,
+                            displayProfilePic: true,
+                            userPicture: profile_picture
+                        }}
+                    />
+                    <div className="account-info-container">
+                        <div>
+                            <Avatar src={profile_picture} alt="Profile picture" className={classes.avatarStyle} />
                         </div>
-                        <div className="flex font-weight-600">
-                            {fullName}
-                            <Button
-                                variant="contained"
-                                color="secondary"
-                                className={classes.button}
-                                onClick={(e) => this.openEditModalhandler()}
-                            >
-                                <EditIcon className={classes.editIcon} />
-                            </Button>
+                        <div>
+                            <h2>{(instagram_posts && instagram_posts.length > 0) && instagram_posts[0].username}</h2>
+                            <div className="profile-info-wrapper">
+                                <div>Posts: 11</div>
+                                <div>Follows: 12</div>
+                                <div>Followed By: 22</div>
+                            </div>
+                            <div className="flex font-weight-600">
+                                {fullName}
+                                <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    className={classes.button}
+                                    onClick={(e) => this.openEditModalhandler()}
+                                >
+                                    <EditIcon className={classes.editIcon} />
+                                </Button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className={classes.root}>
-                    <GridList cellHeight={300} cols={3}>
-                        {(instagram_posts && instagram_posts.length > 0) && instagram_posts.map((post) => (
-                        <GridListTile key={post.media_url} onClick={(e) => this.openPostModalhandler(post)}>
-                            <img src={post.media_url} alt="Picture post" width="200" height="300" />
-                        </GridListTile>
-                        ))}
-                    </GridList>
-                </div>
+                    <div className={classes.root}>
+                        <GridList cellHeight={300} cols={3}>
+                            {(instagram_posts && instagram_posts.length > 0) && instagram_posts.map((post) => (
+                            <GridListTile key={post.media_url} onClick={(e) => this.openPostModalhandler(post)}>
+                                <img src={post.media_url} alt="Picture post" width="200" height="300" />
+                            </GridListTile>
+                            ))}
+                        </GridList>
+                    </div> 
+                </React.Fragment> : this.props.history.push("/")}
             </React.Fragment>
         )
     }

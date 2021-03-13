@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -105,7 +104,7 @@ class Login extends React.Component {
                 // Store access token on successful login
                 sessionStorage.setItem("access-token", this.state.accessToken);
                 this.setState({loginfailureMessage: 'dispNone'});
-                ReactDOM.render(<Home />, document.getElementById('root'));
+                this.props.history.push("/home");
             }else {
                 loginSuccess =  false;
                 // Check if the username / password is empty

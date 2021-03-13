@@ -10,3 +10,12 @@
 .MuiDialog-paperWidthSm {
     max-width: 750px !important;
 }
+.avatarWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+    height: auto;
+    margin: 0 15px 15px 0;
+    border-bottom: 1px solid #cccccc;
+}
