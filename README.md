@@ -13,6 +13,7 @@ There are mainly 3 primary screens / components which are as follows:
 3. Profile screen
 
 Common components are also present such as Header, FormDialog (Modal component).
+
 **Note:**
 Mock / Dummy username and password that should be used to login in this app are as follow:
 Usernames provided are **subhankar**, **username1**, **username2** and **username3**.
