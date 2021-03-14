@@ -3,6 +3,7 @@ Image Viewer Project:
 ImageViewer is a web application, which allows a user to view his/her own profile and the images posted by the user on his/her Instagram account. 
 
 Few features available in this application are as below:
+
 The user can login / logout, like / unlike, add comments, search post based on the caption and update username etc. But none of that will do any sort of change in the user’s actual Instagram account.
 
 Session storage has been used to retain / maintain data across all the screens.
