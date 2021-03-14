@@ -42,7 +42,7 @@ class Profile extends React.Component {
         this.state = {
             profile_picture: sessionStorage.getItem('profile-picture'),
             instagram_posts: JSON.parse(sessionStorage.getItem('instagram-posts')),
-            fullName: 'Subhankar Pradhan',
+            fullName: '',
             updatedFullName: '',
             selectedPostDetails: {},
             openModal: false,
@@ -52,6 +52,10 @@ class Profile extends React.Component {
         }
     }
 
+    componentDidMount() {
+        let changedUserName = JSON.parse(sessionStorage.getItem('updated-username'));
+        this.setState({ fullName: changedUserName ? changedUserName : 'Subhankar Pradhan'});
+    }
     openEditModalhandler = () => {
         this.setState({ 
             editModal: true,
@@ -71,7 +75,6 @@ class Profile extends React.Component {
         let updatedFullName = updatedName.trim();
         if(updatedFullName) {
             this.setState({ 
-                fullName: updatedFullName,
                 nameFieldEmpty: 'dispNone',
                 updatedFullName
             });
@@ -86,7 +89,7 @@ class Profile extends React.Component {
                 postModal: false,
                 editModal: false,
                 openModal: false,
-                updatedFullName: '',
+                fullName: this.state.updatedFullName,
                 nameFieldEmpty: 'dispNone'
             });
         }

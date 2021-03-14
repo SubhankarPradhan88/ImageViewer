@@ -113,7 +113,6 @@ class Home extends React.Component {
 
         // Store user profile picture
         sessionStorage.setItem("profile-picture", this.state.profile_picture);
-        
 
         // ***** MOCK ******
         // let mockResponse = {
@@ -364,9 +363,8 @@ class Home extends React.Component {
 
     render() {
         const { classes } = this.props;
-        let { profile_picture } = this.state;
-        let storedInstagramPosts = JSON.parse(sessionStorage.getItem('instagram-posts'));      
-        let instagramPosts = storedInstagramPosts,
+        let { profile_picture, instagramImageDetail } = this.state;
+        let instagramPosts = instagramImageDetail,
         searchString = this.state.searchString.trim().toLowerCase();
         if(searchString.length > 0) {
             instagramPosts = instagramPosts.filter(function(post) {

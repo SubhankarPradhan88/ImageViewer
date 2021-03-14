@@ -186,7 +186,8 @@ class FormDialog extends React.Component {
     }
     updateNameHandler = (e) => {
         let { value } = e.target;
-        this.props.updateUserNameHandler(value);
+        sessionStorage.setItem('updated-username', JSON.stringify(value));      // Store the updated user name
+        this.props.updateUserNameHandler(value);                                // Call back to it's parent componenet to update the user name
     }
 
     render() {
@@ -197,7 +198,6 @@ class FormDialog extends React.Component {
         for(let count in selectedpostDetails['likes']) {
             likeCount = selectedpostDetails['likes']['count'];
         }
-        console.log('allPostsDetails', this.state.allPostsDetails);
 
         return (
             <React.Fragment>
