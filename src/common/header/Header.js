@@ -50,14 +50,16 @@ class Header extends React.Component {
             accessToken: sessionStorage.getItem('access-token')
         }
     }
+    // Search based on caption of the post
     onSearchEvent = (e) => {
         let { value } = e.target;
         this.props.searchHandler(value);
     }
+    // Toggle the drop down (Show & Hide)
     showDropDownHandler = (e) => {
-        console.log(this.state.showDropDown);
         this.setState({ showDropDown: !this.state.showDropDown });
     }
+    // Handle drop down toggle when the user clicks anywhere in the document
     handleDropDown = () => {
         if(this.state.showDropDown) {
             // Close the drop down asynchronously
@@ -83,7 +85,7 @@ class Header extends React.Component {
 
     render() {
         const { classes, displayItems } = this.props;
-        document.body.addEventListener('click', this.handleDropDown, true);     // Close 'Sort' drop down on click anywhere in the document
+        document.body.addEventListener('click', this.handleDropDown, true);
         
         return (
             <React.Fragment>

@@ -107,6 +107,7 @@ class FormDialog extends React.Component {
             allPostsDetails: JSON.parse(sessionStorage.getItem('instagram-posts'))
         };
     }
+    // Common model / function to handle liked post for individual post
     addLikeHandler = (postId, likeCount) => {
         let { selectedpostDetails } = this.props;
         let likeDetails = {};
@@ -136,6 +137,7 @@ class FormDialog extends React.Component {
         this.setState({ selectedpostDetails });
         sessionStorage.setItem("instagram-posts", JSON.stringify(this.state.allPostsDetails));
     }
+    // Common model / function to handle unliked post for individual post
     unlikeHandler = (postId, likeCount) => {
         let { selectedpostDetails } = this.props;
         let likeDetails = {};
@@ -165,6 +167,7 @@ class FormDialog extends React.Component {
         this.setState({ selectedpostDetails });
         sessionStorage.setItem("instagram-posts", JSON.stringify(this.state.allPostsDetails));
     }
+    // Common model / function to handle all the newly added comment(s) for individual posts
     onSubmitComment = (e, id) => {
         e.stopPropagation();
         let addedCommentVal = document.getElementById(`addComment_${id}`).value.trim();

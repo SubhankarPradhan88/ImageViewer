@@ -56,6 +56,7 @@ class Profile extends React.Component {
         let changedUserName = JSON.parse(sessionStorage.getItem('updated-username'));
         this.setState({ fullName: changedUserName ? changedUserName : 'Subhankar Pradhan'});
     }
+    // Open edit modal
     openEditModalhandler = () => {
         this.setState({ 
             editModal: true,
@@ -63,6 +64,7 @@ class Profile extends React.Component {
             openModal: true 
         });
     }
+    // Open clicked post modal
     openPostModalhandler = (selectedPost) => {
         this.setState({ 
             postModal: true,
@@ -80,6 +82,7 @@ class Profile extends React.Component {
             });
         }
     }
+    // Submit / Change the updated user name
     userNameSubmitHandler = () => {
         if(!this.state.updatedFullName) {
             this.setState({ nameFieldEmpty: 'dispBlock' });
@@ -94,6 +97,7 @@ class Profile extends React.Component {
             });
         }
     }
+    // Close Dialog / Modal
     closeFormDialogHandler = () => {
         this.setState({ 
             postModal: false,
@@ -110,6 +114,7 @@ class Profile extends React.Component {
         
         return(
             <React.Fragment>
+                {/* Display post(s) only if the user has logged in, orelse route the user back to Login screen */}
                 {sessionStorage.getItem("access-token") ? 
                 <React.Fragment>
                     <FormDialog 

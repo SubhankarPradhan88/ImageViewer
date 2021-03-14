@@ -11,7 +11,6 @@ import Input from '@material-ui/core/Input';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
 import Header from '../../common/header/Header';
-import Home from '../../screens/home/Home';
 import './Login.css';
 
 // Custom styles - Material Card component
@@ -35,18 +34,22 @@ const customStyles = () => ({
         marginLeft: -8
     }
 });
-
+// Mock / Dummy usernames and passwords for the app
 const userDetails = [
     {
-        username: 'a',
-        password: 'a'
-    },
-    {
-        username: 'username_2',
+        username: 'subhankar',
         password: 'password'
     },
     {
-        username: 'username_3',
+        username: 'username1',
+        password: 'password'
+    },
+    {
+        username: 'username2',
+        password: 'password'
+    },
+    {
+        username: 'username3',
         password: 'password'
     }
 ];
@@ -65,7 +68,8 @@ class Login extends React.Component {
     }
 
     componentDidMount() {
-        sessionStorage.removeItem("access-token");      // Clear the saved session storage
+        // Remove all saved data from sessionStorage
+        sessionStorage.clear();
     }
 
     // On Change handler for username & password input
@@ -90,7 +94,7 @@ class Login extends React.Component {
                 });
         }
     }
-    // Login handler 
+    // Login handler  / Mandatory field validation
     loginClickHandler = (e) => {
         let loginSuccess = false;
         let loginDetailObj = {};

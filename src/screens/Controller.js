@@ -4,8 +4,6 @@ import Login from "../screens/login/Login";
 import Home from "../screens/home/Home";
 import Profile from "../screens/profile/Profile";
 
-
-
 class Controller extends Component {
   constructor(props) {
     super(props);
@@ -14,6 +12,7 @@ class Controller extends Component {
     return (
       <Router>
         <div className="main-container">
+            {/* Handle routing of respective components */}
             <Route exact path="/" render={(props) => <Login {...props} />} />
             <Route exact path="/home" render={(props) => <Home {...props} />} />
             <Route exact path="/profile" render={(props) => <Profile {...props} />} />

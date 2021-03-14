@@ -86,7 +86,7 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        //Get Instagram Media detail's
+        // Fetch Instagram Media detail's
         let updatedStoredPostDetails = JSON.parse(sessionStorage.getItem('instagram-posts'));
         if(!updatedStoredPostDetails) {
             let { accessToken } = this.state;
@@ -110,50 +110,12 @@ class Home extends React.Component {
         }else {
             this.setState({ instagramImageDetail: JSON.parse(sessionStorage.getItem('instagram-posts')) });
         }
-
         // Store user profile picture
         sessionStorage.setItem("profile-picture", this.state.profile_picture);
-
-        // ***** MOCK ******
-        // let mockResponse = {
-        //     data: [
-        //         {
-        //             id: "17917116379594550",
-        //             caption: "Music meets soul... #guitar"
-        //         },
-        //        {
-        //             id: "18161116435119934",
-        //             caption: "#sweetlove #dessert"
-        //        },
-        //        {
-        //             id: "17869448207302490",
-        //             caption: "#winter #january #heal"
-        //        },
-        //        {
-        //             id: "18199106851042411",
-        //             caption: "#butterfly #nature #peace"
-        //        },
-        //        {
-        //             id: "17882483834061294",
-        //             caption: "#sunset #nature #naturelove"
-        //        }
-        //     ],
-        //     paging: {
-        //         cursors: {
-        //             before: "QVFIUjlWVDhTWHNqc1NXYlJxT01mRmFKbE8wQkppRGdUUmFULXdkZAHlZAU2tlbnZAMdVBvOHcwMjYySDFsNkNaRzFQUmRqN0UtX1RsVDlWaXFFUTRkb3VZAdWFn",
-        //             after: "QVFIUmR0eWVWODNNdUsxZADUycmlvR1EtTS0tZAWN1NXRVcjU0TkFmSDBvVld5cEdkeEpERnhWdGVBNERnT1RvcTdQek84emVLOUUySEdfN0t5ZAW8yYzM3Vm1R"
-        //         }
-        //     }
-        //  };
-
-        // let parsedData = mockResponse.data;
-        // this.setState({ instagramMediaInfo: parsedData}, () => {
-        //     this.fetchImageInfo(parsedData);
-        // });
     }
 
     fetchImageInfo = (mediaInfo) => {
-         //Get Instagram Images / Videos detail's
+         // Fetch individual post's detail(s) based on the post Id
          let { accessToken } = this.state;
          let tempArray = [];
          let mediaResponseArray = mediaInfo;
@@ -194,113 +156,8 @@ class Home extends React.Component {
                 xhrImageInfo.setRequestHeader("Access-Control-Allow-Origin", "*");      // Handle CORS
                 xhrImageInfo.send(dataImageDetail);
             });
-
-        // **** Mock Data *****
-        // let tempArray = [
-        //     {
-        //         id: "17917116379594550",
-        //         media_type: "IMAGE",
-        //         media_url: "https://scontent-bom1-1.cdninstagram.com/v/t51.29350-15/158132159_481858973197455_1767100568549228076_n.jpg?_nc_cat=102&ccb=1-3&_nc_sid=8ae9d6&_nc_ohc=nQUzQTLyRSAAX_TCjNq&_nc_ht=scontent-bom1-1.cdninstagram.com&oh=d3048141f361803a7d54747712c0576c&oe=606CD4AF",
-        //         username: "subhdeveloper88",
-        //         timestamp: "2021-03-08T21:50:20+0000",
-        //         caption: 'Eat',
-        //         hashTags: '#Love #Heal #Peace',
-        //         likes: { count: 0 },
-        //         likeIcon: 'dispBlock',
-        //         likedIcon: 'dispNone',
-        //         comments: ["This is test comment for Post Id: " + Math.floor(Math.random() * (10 - 5 + 1)) + 5, "This is test comment for Post Id: " + Math.floor(Math.random() * (10 - 5 + 1)) + 5]
-        //      },
-        //     {
-        //         id: "18161116435119934",
-        //         media_type: "IMAGE",
-        //         media_url: "https://scontent-bom1-1.cdninstagram.com/v/t51.29350-15/157427159_866915980536626_1415770927514952702_n.jpg?_nc_cat=101&ccb=1-3&_nc_sid=8ae9d6&_nc_ohc=2y3f5sqmxOcAX_C--7_&_nc_ht=scontent-bom1-1.cdninstagram.com&oh=034490be3eac33af27ad428f8ca74a3b&oe=606AA919",
-        //         username: "subhdeveloper88",
-        //         timestamp: "2021-03-06T16:30:26+0000",
-        //         caption: 'Read',
-        //         hashTags: '#Love #Heal #Peace',
-        //         likes: {
-        //             count: 1
-        //         },
-        //         likeIcon: 'dispBlock',
-        //         likedIcon: 'dispNone',
-        //         comments: ["This is test comment for Post Id: " + Math.floor(Math.random() * (10 - 5 + 1)) + 5, "This is test comment for Post Id: " + Math.floor(Math.random() * (10 - 5 + 1)) + 5]
-        //      },
-        //      {
-        //         id: "17869448207302490",
-        //         media_type: "IMAGE",
-        //         media_url: "https://scontent-bom1-2.cdninstagram.com/v/t51.29350-15/158212859_487981989239532_745530961166136984_n.jpg?_nc_cat=108&ccb=1-3&_nc_sid=8ae9d6&_nc_ohc=P2kHbURgDN8AX9vUfId&_nc_ht=scontent-bom1-2.cdninstagram.com&oh=b524e6076ea1db00218919e97d094527&oe=606BB7DD",
-        //         username: "subhdeveloper88",
-        //         timestamp: "2021-03-06T16:29:40+0000",
-        //         caption: 'Music',
-        //         hashTags: '#Love #Heal #Peace',
-        //         likes: {
-        //             count: Math.floor(Math.random() * (10 - 5 + 1)) + 5
-        //         },
-        //         likeIcon: 'dispBlock',
-        //         likedIcon: 'dispNone',
-        //         comments: ["This is test comment for Post Id: " + Math.floor(Math.random() * (10 - 5 + 1)) + 5, "This is test comment for Post Id: " + Math.floor(Math.random() * (10 - 5 + 1)) + 5]
-        //      },
-        //      {
-        //         id: "18199106851042411",
-        //         media_type: "IMAGE",
-        //         media_url: "https://scontent-bom1-2.cdninstagram.com/v/t51.29350-15/156905243_2759659677680198_1805264822665327254_n.jpg?_nc_cat=111&ccb=1-3&_nc_sid=8ae9d6&_nc_ohc=1DdCqEhg7BAAX8zs-WD&_nc_ht=scontent-bom1-2.cdninstagram.com&oh=f9eec3e3b45d92a468926d0e2498d238&oe=606C68C9",
-        //         username: "subhdeveloper88",
-        //         timestamp: "2021-03-06T16:28:22+0000",
-        //         caption: 'Music 01',
-        //         hashTags: '#Love #Heal #Peace',
-        //         likes: {
-        //             count: Math.floor(Math.random() * (10 - 5 + 1)) + 5
-        //         },
-        //         likeIcon: 'dispBlock',
-        //         likedIcon: 'dispNone',
-        //         comments: ["This is test comment for Post Id: " + Math.floor(Math.random() * (10 - 5 + 1)) + 5, "This is test comment for Post Id: " + Math.floor(Math.random() * (10 - 5 + 1)) + 5]
-        //      },
-        //      {
-        //         id: "17882483834061294",
-        //         media_type: "IMAGE",
-        //         media_url: "https://scontent-bom1-2.cdninstagram.com/v/t51.29350-15/157021635_237232678054679_1552139667774356302_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=8ae9d6&_nc_ohc=zrTb5JH3s8gAX9wqfZq&_nc_ht=scontent-bom1-2.cdninstagram.com&oh=6190d48361d0b2c32506635d8784e326&oe=606B7521",
-        //         username: "subhdeveloper88",
-        //         timestamp: "2021-03-06T16:27:20+0000",
-        //         caption: 'Music03',
-        //         hashTags: '#Love #Heal #Peace',
-        //         likes: {
-        //             count: Math.floor(Math.random() * (10 - 5 + 1)) + 5
-        //         },
-        //         likeIcon: 'dispBlock',
-        //         likedIcon: 'dispNone',
-        //         comments: ["This is test comment for Post Id: " + Math.floor(Math.random() * (10 - 5 + 1)) + 5, "This is test comment for Post Id: " + Math.floor(Math.random() * (10 - 5 + 1)) + 5]
-        //      }
-        // ]
-        // let updatedStoredPostDetails = JSON.parse(sessionStorage.getItem('instagram-posts'));
-        // if(!updatedStoredPostDetails) {
-        //     this.setState({ instagramImageDetail: tempArray });
-        //     sessionStorage.setItem("instagram-posts", JSON.stringify(tempArray));
-        // }else {
-        //     this.setState({ instagramImageDetail: JSON.parse(sessionStorage.getItem('instagram-posts')) });
-        // }
-        
     }
-    onSubmitComment = (e, id) => {
-        e.stopPropagation();
-        let addedCommentVal = document.getElementById(`addComment_${id}`).value.trim();
-        let { instagramImageDetail } = this.state;
-        const tempPostArray = instagramImageDetail;
-        let commentInfo = {}, newAddedComment = [];
-        commentInfo['id'] = id;
-        commentInfo['newComments'] = addedCommentVal;
-        newAddedComment.push(commentInfo);
-        
-        for(let i = 0; i < instagramImageDetail.length; i++) {
-            for(let j = 0; j < newAddedComment.length; j++) {
-                if((instagramImageDetail[i]['id'] === newAddedComment[j]['id']) && newAddedComment[j]['newComments']) {
-                    tempPostArray[i]['comments'] = [...instagramImageDetail[i]['comments'], ...[newAddedComment[j]['newComments']]];
-                }
-            }
-        }
-        this.setState({ instagramImageDetail: tempPostArray });
-        document.getElementById(`addComment_${id}`).value = '';
-        sessionStorage.setItem("instagram-posts", JSON.stringify(tempPostArray));
-    }
+    // Common model / function to handle liked post for individual post
     addLikeHandler = (postId, likeCount) => {
         let { instagramImageDetail } = this.state;
         let likeDetails = {};
@@ -327,8 +184,9 @@ class Home extends React.Component {
                 }
             }
         }
-        sessionStorage.setItem("instagram-posts", JSON.stringify(instagramImageDetail));
+        sessionStorage.setItem("instagram-posts", JSON.stringify(instagramImageDetail));        // Store the updated liked count state in the session storage
     }
+    // Common model / function to handle unliked post for individual post
     unlikeHandler = (postId, likeCount) => {
         let { instagramImageDetail } = this.state;
         let likeDetails = {};
@@ -355,8 +213,31 @@ class Home extends React.Component {
                 }
             }
         }
-        sessionStorage.setItem("instagram-posts", JSON.stringify(instagramImageDetail));
+        sessionStorage.setItem("instagram-posts", JSON.stringify(instagramImageDetail));        // Store the updated unliked count state in the session storage
     }
+    // Common model / function to handle all the newly added comment(s) for individual posts
+    onSubmitComment = (e, id) => {
+        e.stopPropagation();
+        let addedCommentVal = document.getElementById(`addComment_${id}`).value.trim();
+        let { instagramImageDetail } = this.state;
+        const tempPostArray = instagramImageDetail;
+        let commentInfo = {}, newAddedComment = [];
+        commentInfo['id'] = id;
+        commentInfo['newComments'] = addedCommentVal;
+        newAddedComment.push(commentInfo);
+        
+        for(let i = 0; i < instagramImageDetail.length; i++) {
+            for(let j = 0; j < newAddedComment.length; j++) {
+                if((instagramImageDetail[i]['id'] === newAddedComment[j]['id']) && newAddedComment[j]['newComments']) {
+                    tempPostArray[i]['comments'] = [...instagramImageDetail[i]['comments'], ...[newAddedComment[j]['newComments']]];
+                }
+            }
+        }
+        this.setState({ instagramImageDetail: tempPostArray });
+        document.getElementById(`addComment_${id}`).value = '';
+        sessionStorage.setItem("instagram-posts", JSON.stringify(tempPostArray));           // Store the updated comment(s) state in the session storage
+    }
+    // Search feature based on the post's caption
     searchCaptionHandler = (searchText) => {
         this.setState({ searchString: searchText });
     }
@@ -373,7 +254,7 @@ class Home extends React.Component {
         }
         return (
             <React.Fragment>
-                {/* Once user has logged in, display the below posts */}
+                {/* Display all the media post's details only if the user has logged in, orelse route the user back to Login screen */}
                 {sessionStorage.getItem("access-token") ? 
                 <React.Fragment>
                     <Header 
