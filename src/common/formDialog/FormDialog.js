@@ -195,7 +195,7 @@ class FormDialog extends React.Component {
 
     render() {
         let { classes, showModal, selectedAction, selectedpostDetails, closeFormDialogHandler, userNameSubmitHandler } = this.props;
-        let { editModal, nameFieldEmpty } = selectedAction;
+        let { editModal, postModal, nameFieldEmpty } = selectedAction;
         const profile_picture = sessionStorage.getItem('profile-picture');
         let likeCount = 0;
         for(let count in selectedpostDetails['likes']) {
@@ -205,7 +205,7 @@ class FormDialog extends React.Component {
         return (
             <React.Fragment>
                 <Dialog className={editModal ? classes.updateUserNameDialog : classes.updatePostsDialog} open={showModal} onClose={closeFormDialogHandler} aria-labelledby="form-dialog-title">
-                    {editModal ? 
+                    {editModal &&
                     <div>
                         <DialogTitle id="form-dialog-title">Edit</DialogTitle>
                         <DialogContent className={classes.userNameContentStyle}>
@@ -226,8 +226,8 @@ class FormDialog extends React.Component {
                                 Update
                             </Button>
                         </DialogActions>
-                    </div> : 
-                    <div className={classes.editPostWrapper} id="user-profile-details">
+                    </div>}
+                    {postModal && <div className={classes.editPostWrapper} id="user-profile-details">
                         <div className={classes.postImageWrapper}>
                             <img src={selectedpostDetails['media_url']} className={classes.postImage} />
                         </div>

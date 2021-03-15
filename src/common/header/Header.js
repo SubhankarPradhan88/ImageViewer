@@ -50,6 +50,10 @@ class Header extends React.Component {
             accessToken: sessionStorage.getItem('access-token')
         }
     }
+
+    componentDidMount() {
+        document.body.addEventListener('click', this.handleDropDown);
+    }
     // Search based on caption of the post
     onSearchEvent = (e) => {
         let { value } = e.target;
@@ -85,7 +89,6 @@ class Header extends React.Component {
 
     render() {
         const { classes, displayItems } = this.props;
-        document.body.addEventListener('click', this.handleDropDown, true);
         
         return (
             <React.Fragment>
