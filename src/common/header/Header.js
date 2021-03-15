@@ -51,9 +51,6 @@ class Header extends React.Component {
         }
     }
 
-    componentDidMount() {
-        document.body.addEventListener('click', this.handleDropDown);
-    }
     // Search based on caption of the post
     onSearchEvent = (e) => {
         let { value } = e.target;
@@ -62,15 +59,6 @@ class Header extends React.Component {
     // Toggle the drop down (Show & Hide)
     showDropDownHandler = (e) => {
         this.setState({ showDropDown: !this.state.showDropDown });
-    }
-    // Handle drop down toggle when the user clicks anywhere in the document
-    handleDropDown = () => {
-        if(this.state.showDropDown) {
-            // Close the drop down asynchronously
-            setTimeout(() => { 
-                this.setState({ showDropDown: false });
-            },0);
-        }
     }
     routeHandler = (check) => {
         if(check === 'logout') {

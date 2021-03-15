@@ -19,11 +19,11 @@ import Header from '../../common/header/Header';
 // Custom styles - Material Card component
 const customStyles = (theme) => ({ 
     root: {
-        margin: '2% 1% 2% 1%',
-        width: 325,
+        margin: '2%',
+        width: 'auto',
         height: 'auto',
         float: 'left',
-        padding: '0 55px 0 15px'
+        padding: '0 75px 0 15px'
       },
       media: {
         height: 0,
@@ -48,7 +48,7 @@ const customStyles = (theme) => ({
       },
       textFieldWidth: {
         margin: '0 0 0 -7px',
-        width: '80%'
+        width: '86%'
       },
       likeStyle: {
         color: '#000000'
@@ -62,10 +62,10 @@ const customStyles = (theme) => ({
       },
       comments: {
         marginTop: 10,
+        width: '107%',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        width: '112%'
       }
 });
 
